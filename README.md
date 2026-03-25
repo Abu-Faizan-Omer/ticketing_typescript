@@ -42,3 +42,12 @@ Now, Skaffold should be fully installed and accessible from both external termin
 command to install ingress nginx
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.15.1/deploy/static/provider/cloud/deploy.yaml
 
+////////////////////////////////////////////////////////////////
+
+ERRORRrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+
+tsconfig.json syntax error: The file contained extra invalid JSON content after the main configuration block, causing a "End of file expected" error. I removed the extraneous part.
+
+Import path extensions: Your imports used .ts extensions (e.g., import { currentUserRouter } from './routes/current-user.ts';), but TypeScript's nodenext module resolution requires either .js extensions for relative imports or enabling allowImportingTsExtensions. Since you have verbatimModuleSyntax enabled, I added "allowImportingTsExtensions": true and "noEmit": true to the tsconfig.json to allow .ts extensions without changing your import statements.
+
+Missing type import: In request-validation-error.ts, ValidationError from express-validator was not imported. I added import type { ValidationError } from 'express-validator'; (using a type-only import as required by verbatimModuleSyntax).

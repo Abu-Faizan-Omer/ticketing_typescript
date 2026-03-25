@@ -41,25 +41,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
-////////////////////////////////////////////////////////////////////////////////////
-//chat gpt configuration
-
-// {
-//   "compilerOptions": {
-//     "module": "ESNext",           // Use ESNext for ECMAScript module support
-//     "moduleResolution": "node",   // Resolve modules like Node.js does
-//     "target": "ESNext",           // Use the latest JavaScript features
-//     "esModuleInterop": true,      // Enable interoperability between ESM and CommonJS
-//     "strict": true,               // Enable strict type-checking
-//     "sourceMap": true,            // Generate source maps for debugging
-//     "declaration": true,          // Generate declaration files (.d.ts)
-//     "outDir": "./dist",           // Specify the output directory for compiled files
-//     "isolatedModules": true,      // Ensure all files can be transpiled independently
-//     "skipLibCheck": true,         // Skip checking of library files for faster compilation
-//     "resolveJsonModule": true     // Allow importing JSON modules
-//   },
-//   "include": ["src/**/*.ts"],      // Include your TypeScript source files
-//   "exclude": ["node_modules"]      // Exclude node_modules
-// }

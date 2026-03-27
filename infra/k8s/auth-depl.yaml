@@ -1,3 +1,41 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: auth-depl
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: auth
+#   template:
+#     metadata:
+#       labels:
+#         app: auth
+#     spec:
+#       containers:
+#         - name: auth
+#           image: abufaizanomer/auth
+#           env:
+#             - name: JWT_KEY
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: jwt-secret
+#                   key: JWT_KEY
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: auth-svc
+# spec:
+#   selector:
+#     app: auth
+#   ports:
+#     - name: auth
+#       protocol: TCP
+#       port: 3000
+#       targetPort: 3000               
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,12 +59,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-svc
+  name: auth-srv
 spec:
   selector:
     app: auth
@@ -34,4 +71,4 @@ spec:
     - name: auth
       protocol: TCP
       port: 3000
-      targetPort: 3000               
+      targetPort: 3000

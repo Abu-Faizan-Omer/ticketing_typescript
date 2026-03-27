@@ -8,8 +8,8 @@ import { currentUserRouter } from './routes/current-user.ts';
 import { signinRouter } from './routes/signin.ts';
 import { signoutRouter } from './routes/signout.ts';
 import { signupRouter } from './routes/signup.ts';
-import { errorHandler } from './middlewares/error-handler.ts';
-import { NotFoundError } from './errors/not-found-error.ts';    
+import { errorHandler } from "@afotickets/common";
+import { NotFoundError } from "@afotickets/common";   
 
 
 const app = express();
@@ -38,7 +38,7 @@ const start= async()=>{
         throw new Error('JWT_KEY must be defined');
     }
     try{
-        await mongoose.connect('mongodb://auth-mongo-svc:27017/auth');
+        await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
         console.log('Connected to MongoDB');
     }
     catch(err){

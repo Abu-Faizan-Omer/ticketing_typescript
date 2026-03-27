@@ -51,3 +51,21 @@ tsconfig.json syntax error: The file contained extra invalid JSON content after 
 Import path extensions: Your imports used .ts extensions (e.g., import { currentUserRouter } from './routes/current-user.ts';), but TypeScript's nodenext module resolution requires either .js extensions for relative imports or enabling allowImportingTsExtensions. Since you have verbatimModuleSyntax enabled, I added "allowImportingTsExtensions": true and "noEmit": true to the tsconfig.json to allow .ts extensions without changing your import statements.
 
 Missing type import: In request-validation-error.ts, ValidationError from express-validator was not imported. I added import type { ValidationError } from 'express-validator'; (using a type-only import as required by verbatimModuleSyntax).
+
+
+
+
+///
+create npm package and deploy to npm 
+package name-@afutickets/common
+
+create a package of common file and deploy to npm as a package and in auth folder it import and use as a package 
+
+//command to deploy on npm 
+
+npm login
+npm run pub
+npm publish --access public
+while deploy file is in .js 
+like this 
+import { CustomError } from "./custom-error.js";

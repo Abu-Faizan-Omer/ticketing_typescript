@@ -1,37 +1,43 @@
 import express from 'express';
-import bodyParser from 'body-parser'; 
 import mongoose  from 'mongoose';
 import cookieSession from 'cookie-session';
 
+import { createTicketRouter } from './routes/new.ts';
+import  { showTicketRouter } from './routes/show.ts'
+import {indexTicketRouter} from './routes/index.ts';
+import { updateTicketRouter } from './routes/update.ts';    
 
-import { currentUserRouter } from './routes/current-user.ts';
-import { signinRouter } from './routes/signin.ts';
-import { signoutRouter } from './routes/signout.ts';
-import { signupRouter } from './routes/signup.ts';
-import { errorHandler } from "@afotickets/common";
-import { NotFoundError } from "@afotickets/common";   
+
+import { errorHandler, NotFoundError, currentUser } from "@afotickets/common";
+   
+
 
 
 const app = express();
 app.set('trust proxy', true);   
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieSession({
         signed: false,
         secure: false
     })
 )
 
-app.use(currentUserRouter);
-app.use(signinRouter);
-app.use(signoutRouter);
-app.use(signupRouter);
+app.use(currentUser);
+
+app.use(createTicketRouter);
+app.use(showTicketRouter);
+app.use(indexTicketRouter);
+app.use(updateTicketRouter);
+
+
 
 app.use(async(req,res,next)=>{
     next(new NotFoundError());
 })
-
 app.use(errorHandler);
+
+
 
 const start= async()=>{
     if(!process.env.JWT_KEY){

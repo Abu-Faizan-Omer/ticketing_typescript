@@ -5,6 +5,8 @@ export default ({ currentUser }) => {
     !currentUser && { label: 'Sign Up', href: '/auth/signup' },
     !currentUser && { label: 'Sign In', href: '/auth/signin' },
     currentUser && { label: 'Sign Out', href: '/auth/signout' },
+    currentUser && {label : 'Create Ticket', href: '/tickets/new' },
+    currentUser && {label : 'All Tickets', href: '/' },
   ]
     .filter((linkConfig) => linkConfig)
     .map(({ label, href }) => {

@@ -3,7 +3,9 @@ import type {Request ,Response} from "express";
 import { body } from "express-validator";
 import { validateRequest,NotFoundError, requireAuth, NotAuthorizedError } from "@afotickets/common";
 import { Ticket } from "../models/ticket.ts";
- 
+import { TicketUpdatedPublisher } from "../events/publisher/ticket-updated-publishers.ts";
+import { natsWrapper } from "../nats-wrapper.ts"; 
+
 const router = express.Router()
  
 router.put('/api/tickets/:id',requireAuth,
@@ -23,11 +25,18 @@ if(ticket.userId !== req.currentUser!.id){
  
 ticket.set({
     title:req.body.title,
-    price:req.body.price
+    price:req.body.price 
 })
 await ticket.save();
- 
-res.send(ticket)
+
+await new TicketUpdatedPublisher(natsWrapper.client).publish({
+    id: ticket.id,
+    title: ticket.title,
+    price: ticket.price,
+    userId: ticket.userId
+});
+
+res.send(ticket);
  
 })
  
